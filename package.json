@@ -1,0 +1,25 @@
+{
+  "name": "es-maptalks",
+  "version": "1.0.0",
+  "description": "ES Maptk",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "author": "Nam Le",
+  "license": "MIT",
+  "devDependencies": {
+    "@grafana/data": "next",
+    "@grafana/toolkit": "next",
+    "@grafana/ui": "next"
+  },
+  "dependencies": {
+    "maptalks": "^0.49.1",
+    "maptalks.three": "^0.12.3",
+    "nanoid": "^3.1.20",
+    "react-dropzone": "^11.2.4",
+    "three": "^0.123.0"
+  }
+}
