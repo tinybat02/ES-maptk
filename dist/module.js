@@ -100907,6 +100907,20 @@ var createLayer = function createLayer(series, geojson) {
           var tooltip = this.getToolTip();
           tooltip._content = name + " : " + num;
         });
+        mesh.on('touchmove', function (e) {
+          var select = e.selectMesh;
+          var data;
+
+          if (select) {
+            data = select.data;
+          }
+
+          var num = data.getProperties().num;
+          var name = data.getProperties().name; //@ts-ignore
+
+          var tooltip = this.getToolTip();
+          tooltip._content = name + " : " + num;
+        });
       }
     });
     animation();

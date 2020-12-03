@@ -83,6 +83,20 @@ export const createLayer = (series: Frame[], geojson: IGeoJSON) => {
           const tooltip = this.getToolTip();
           tooltip._content = `${name} : ${num}`;
         });
+
+        mesh.on('touchmove', function(e: any) {
+          const select = e.selectMesh;
+
+          let data;
+          if (select) {
+            data = select.data;
+          }
+          const num = data.getProperties().num;
+          const name = data.getProperties().name;
+          //@ts-ignore
+          const tooltip = this.getToolTip();
+          tooltip._content = `${name} : ${num}`;
+        });
       }
     });
 
