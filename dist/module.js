@@ -100883,43 +100883,43 @@ var createLayer = function createLayer(series, geojson) {
           num: assignValueToStore[feature.properties.name],
           name: feature.properties.name
         });
-        var mesh = threeLayer.toExtrudePolygons(polygon, {
+        var mesh_1 = threeLayer.toExtrudePolygons(polygon, {
           topColor: '#fff'
         }, material);
-        meshs.push(mesh);
+        meshs.push(mesh_1);
         threeLayer.addMesh(meshs);
-        mesh.setToolTip('tip', {
+        mesh_1.setToolTip('tip', {
           showTimeout: 0,
           eventsPropagation: true,
           dx: 10
-        });
-        mesh.on('mouseover', function (e) {
-          var select = e.selectMesh;
-          var data;
+        }); // mesh.on('mouseover', function(e: any) {
+        //   const select = e.selectMesh;
+        //   let data;
+        //   if (select) {
+        //     data = select.data;
+        //   }
+        //   const num = data.getProperties().num;
+        //   const name = data.getProperties().name;
+        //   //@ts-ignore
+        //   const tooltip = this.getToolTip();
+        //   tooltip._content = `${name} : ${num}`;
+        // });
 
-          if (select) {
-            data = select.data;
-          }
+        ['click', 'mousemove', 'mouseout', 'mouseover', 'mousedown', 'mouseup', 'dblclick', 'contextmenu'].forEach(function (eventType) {
+          mesh_1.on(eventType, function (e) {
+            var select = e.selectMesh;
+            var data;
 
-          var num = data.getProperties().num;
-          var name = data.getProperties().name; //@ts-ignore
+            if (select) {
+              data = select.data;
+            }
 
-          var tooltip = this.getToolTip();
-          tooltip._content = name + " : " + num;
-        });
-        mesh.on('click', function (e) {
-          var select = e.selectMesh;
-          var data;
+            var num = data.getProperties().num;
+            var name = data.getProperties().name; //@ts-ignore
 
-          if (select) {
-            data = select.data;
-          }
-
-          var num = data.getProperties().num;
-          var name = data.getProperties().name; //@ts-ignore
-
-          var tooltip = this.getToolTip();
-          tooltip._content = name + " : " + num;
+            var tooltip = this.getToolTip();
+            tooltip._content = name + " : " + num;
+          });
         });
       }
     });

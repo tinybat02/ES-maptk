@@ -70,33 +70,37 @@ export const createLayer = (series: Frame[], geojson: IGeoJSON) => {
           dx: 10,
         });
 
-        mesh.on('mouseover', function(e: any) {
-          const select = e.selectMesh;
+        // mesh.on('mouseover', function(e: any) {
+        //   const select = e.selectMesh;
 
-          let data;
-          if (select) {
-            data = select.data;
+        //   let data;
+        //   if (select) {
+        //     data = select.data;
+        //   }
+        //   const num = data.getProperties().num;
+        //   const name = data.getProperties().name;
+        //   //@ts-ignore
+        //   const tooltip = this.getToolTip();
+        //   tooltip._content = `${name} : ${num}`;
+        // });
+
+        ['click', 'mousemove', 'mouseout', 'mouseover', 'mousedown', 'mouseup', 'dblclick', 'contextmenu'].forEach(
+          function(eventType) {
+            mesh.on(eventType, function(e: any) {
+              const select = e.selectMesh;
+
+              let data;
+              if (select) {
+                data = select.data;
+              }
+              const num = data.getProperties().num;
+              const name = data.getProperties().name;
+              //@ts-ignore
+              const tooltip = this.getToolTip();
+              tooltip._content = `${name} : ${num}`;
+            });
           }
-          const num = data.getProperties().num;
-          const name = data.getProperties().name;
-          //@ts-ignore
-          const tooltip = this.getToolTip();
-          tooltip._content = `${name} : ${num}`;
-        });
-
-        mesh.on('click', function(e: any) {
-          const select = e.selectMesh;
-
-          let data;
-          if (select) {
-            data = select.data;
-          }
-          const num = data.getProperties().num;
-          const name = data.getProperties().name;
-          //@ts-ignore
-          const tooltip = this.getToolTip();
-          tooltip._content = `${name} : ${num}`;
-        });
+        );
       }
     });
 
