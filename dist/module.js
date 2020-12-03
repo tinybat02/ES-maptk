@@ -100908,7 +100908,7 @@ var createLayer = function createLayer(series, geojson) {
           var tooltip = this.getToolTip();
           tooltip._content = name + " : " + num;
         });
-        ['dblclick'].forEach(function (eventType) {
+        ['mousedown', 'mousemove', 'touchstart', 'touchmove'].forEach(function (eventType) {
           mesh_1.on(eventType, function (e) {
             var select = e.selectMesh;
             var data;
