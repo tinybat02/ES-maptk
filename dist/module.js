@@ -100884,17 +100884,17 @@ var createLayer = function createLayer(series, geojson) {
           num: assignValueToStore[feature.properties.name],
           name: feature.properties.name
         });
-        var mesh = threeLayer.toExtrudePolygons(polygon, {
+        var mesh_1 = threeLayer.toExtrudePolygons(polygon, {
           topColor: '#fff'
         }, material);
-        meshs.push(mesh);
+        meshs.push(mesh_1);
         threeLayer.addMesh(meshs);
-        mesh.setToolTip('tip', {
+        mesh_1.setToolTip('tip', {
           showTimeout: 0,
           eventsPropagation: true,
           dx: 10
         });
-        mesh.on('mouseover', function (e) {
+        mesh_1.on('mouseover', function (e) {
           var select = e.selectMesh;
           var data;
 
@@ -100907,6 +100907,22 @@ var createLayer = function createLayer(series, geojson) {
 
           var tooltip = this.getToolTip();
           tooltip._content = name + " : " + num;
+        });
+        ['click', 'dblclick'].forEach(function (eventType) {
+          mesh_1.on(eventType, function (e) {
+            var select = e.selectMesh;
+            var data;
+
+            if (select) {
+              data = select.data;
+            }
+
+            var num = data.getProperties().num;
+            var name = data.getProperties().name; //@ts-ignore
+
+            var tooltip = this.getToolTip();
+            tooltip._content = name + " : " + num;
+          });
         });
       }
     });
