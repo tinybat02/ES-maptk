@@ -30,6 +30,7 @@ export class MainPanel extends PureComponent<Props, State> {
         attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
       }),
       touchGesture: true,
+      doubleClickZoom: false,
     });
 
     if (!this.props.options.geojson) return;

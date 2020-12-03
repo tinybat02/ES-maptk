@@ -100681,7 +100681,8 @@ function (_super) {
         subdomains: ['a', 'b', 'c', 'd'],
         attribution: '&copy; <a href="https://carto.com/">CARTO</a>'
       }),
-      touchGesture: true
+      touchGesture: true,
+      doubleClickZoom: false
     });
     if (!this.props.options.geojson) return;
 
@@ -100907,7 +100908,7 @@ var createLayer = function createLayer(series, geojson) {
           var tooltip = this.getToolTip();
           tooltip._content = name + " : " + num;
         });
-        ['touchstart', 'touchmove', 'touchactstart', 'touchacting'].forEach(function (eventType) {
+        ['dblclick'].forEach(function (eventType) {
           mesh_1.on(eventType, function (e) {
             var select = e.selectMesh;
             var data;

@@ -84,7 +84,7 @@ export const createLayer = (series: Frame[], geojson: IGeoJSON) => {
           tooltip._content = `${name} : ${num}`;
         });
 
-        ['touchstart', 'touchmove', 'touchactstart', 'touchacting'].forEach(function(eventType) {
+        ['dblclick'].forEach(function(eventType) {
           mesh.on(eventType, function(e: any) {
             const select = e.selectMesh;
 
