@@ -100907,7 +100907,7 @@ var createLayer = function createLayer(series, geojson) {
           var tooltip = this.getToolTip();
           tooltip._content = name + " : " + num;
         });
-        mesh.on('touchstart', function (e) {
+        mesh.on('click', function (e) {
           var select = e.selectMesh;
           var data;
 
