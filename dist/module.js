@@ -100815,13 +100815,12 @@ var defaults = {
 /*!*************************!*\
   !*** ./util/process.ts ***!
   \*************************/
-/*! exports provided: createLayer, createLayerPure */
+/*! exports provided: createLayer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createLayer", function() { return createLayer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createLayerPure", function() { return createLayerPure; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three */ "../node_modules/three/build/three.module.js");
 /* harmony import */ var maptalks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! maptalks */ "../node_modules/maptalks/dist/maptalks.es.js");
@@ -100876,25 +100875,28 @@ var createLayer = function createLayer(series, geojson) {
           transparent: true
         });
         var polygon = maptalks__WEBPACK_IMPORTED_MODULE_2__["GeoJSON"].toGeometry(feature);
-        var height = 10;
-        if (percentage >= 0.4) height = 20;
-        if (percentage >= 0.8) height = 30;
+        var height = 3;
+
+        if (percentage >= 0.1) {
+          height = (Math.round(percentage * 10) + 1) * 3;
+        }
+
         polygon.setProperties({
           height: height,
           num: assignValueToStore[feature.properties.name],
           name: feature.properties.name
         });
-        var mesh_1 = threeLayer.toExtrudePolygons(polygon, {
+        var mesh = threeLayer.toExtrudePolygons(polygon, {
           topColor: '#fff'
         }, material);
-        meshs.push(mesh_1);
+        meshs.push(mesh);
         threeLayer.addMesh(meshs);
-        mesh_1.setToolTip('tip', {
+        mesh.setToolTip('tip', {
           showTimeout: 0,
           eventsPropagation: true,
           dx: 10
         });
-        mesh_1.on('mouseover', function (e) {
+        mesh.on('mouseover', function (e) {
           var select = e.selectMesh;
           var data;
 
@@ -100907,22 +100909,6 @@ var createLayer = function createLayer(series, geojson) {
 
           var tooltip = this.getToolTip();
           tooltip._content = name + " : " + num;
-        });
-        ['click', 'dblclick'].forEach(function (eventType) {
-          mesh_1.on(eventType, function (e) {
-            var select = e.selectMesh;
-            var data;
-
-            if (select) {
-              data = select.data;
-            }
-
-            var num = data.getProperties().num;
-            var name = data.getProperties().name; //@ts-ignore
-
-            var tooltip = this.getToolTip();
-            tooltip._content = name + " : " + num;
-          });
         });
       }
     });
@@ -100940,67 +100926,6 @@ var createLayer = function createLayer(series, geojson) {
   }
 
   return threeLayer;
-};
-var createLayerPure = function createLayerPure(series, geojson) {
-  var stores = [];
-  var assignValueToStore = {};
-  var assignValueToStoreLog = {};
-  series.map(function (item) {
-    var sumValue = item.fields[0].values.buffer.reduce(function (sum, elm) {
-      return sum + elm;
-    }, 0);
-
-    if (item.name) {
-      stores.push(item.name);
-      assignValueToStore[item.name] = sumValue;
-      assignValueToStoreLog[item.name] = Math.log2(sumValue);
-    }
-  });
-  var heatValues = Object.values(assignValueToStoreLog);
-  var max = Math.max.apply(Math, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])(heatValues));
-  var min = Math.min.apply(Math, Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"])(heatValues));
-  var range = max - min;
-  var buildings = [];
-  geojson.features.map(function (feature) {
-    if (feature.properties && feature.properties.name && stores.includes(feature.properties.name)) {
-      var percentage = (assignValueToStoreLog[feature.properties.name] - min) / range;
-      var color = range != 0 ? percentageToHsl(percentage) : 'hsla(49, 100%, 50%, 0.5)';
-      var polygon = new maptalks__WEBPACK_IMPORTED_MODULE_2__["Polygon"](feature.geometry.coordinates, {
-        symbol: {
-          lineColor: color,
-          lineWidth: 0,
-          polygonFill: color,
-          polygonOpacity: 1,
-          // textName: feature.properties.name,
-          textSize: 14
-        },
-        properties: {
-          altitude: 10
-        }
-      });
-      var linecover = new maptalks__WEBPACK_IMPORTED_MODULE_2__["LineString"](feature.geometry.coordinates[0], {
-        symbol: {
-          lineColor: '#1bbc9b',
-          lineWidth: 1,
-          polygonFill: color,
-          polygonOpacity: 1
-        },
-        properties: {
-          altitude: 10
-        }
-      });
-      buildings.push(linecover);
-      buildings.push(polygon);
-    }
-  });
-  return new maptalks__WEBPACK_IMPORTED_MODULE_2__["VectorLayer"]('vector', buildings, {
-    enableAltitude: true,
-    drawAltitude: {
-      polygonFill: '#1bbc9b',
-      polygonOpacity: 1,
-      lineWidth: 1
-    }
-  });
 };
 
 /***/ }),
