@@ -83,22 +83,6 @@ export const createLayer = (series: Frame[], geojson: IGeoJSON) => {
           const tooltip = this.getToolTip();
           tooltip._content = `${name} : ${num}`;
         });
-
-        ['mousedown', 'mousemove', 'touchstart', 'touchmove'].forEach(function(eventType) {
-          mesh.on(eventType, function(e: any) {
-            const select = e.selectMesh;
-
-            let data;
-            if (select) {
-              data = select.data;
-            }
-            const num = data.getProperties().num;
-            const name = data.getProperties().name;
-            //@ts-ignore
-            const tooltip = this.getToolTip();
-            tooltip._content = `${name} : ${num}`;
-          });
-        });
       }
     });
 
