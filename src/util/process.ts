@@ -84,7 +84,7 @@ export const createLayer = (series: Frame[], geojson: IGeoJSON) => {
           tooltip._content = `${name} : ${num}`;
         });
 
-        mesh.on('touchacting', function(e: any) {
+        mesh.on('touchstart', function(e: any) {
           const select = e.selectMesh;
 
           let data;
