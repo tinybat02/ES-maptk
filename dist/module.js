@@ -100849,7 +100849,7 @@ var createLayer = function createLayer(series, geojson) {
     if (item.name) {
       stores.push(item.name);
       assignValueToStore[item.name] = sumValue;
-      assignValueToStoreLog[item.name] = Math.sqrt(sumValue);
+      assignValueToStoreLog[item.name] = Math.log2(sumValue);
     }
   });
   var heatValues = Object.values(assignValueToStoreLog);

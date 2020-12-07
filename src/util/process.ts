@@ -20,7 +20,7 @@ export const createLayer = (series: Frame[], geojson: IGeoJSON) => {
     if (item.name) {
       stores.push(item.name);
       assignValueToStore[item.name] = sumValue;
-      assignValueToStoreLog[item.name] = Math.sqrt(sumValue);
+      assignValueToStoreLog[item.name] = Math.log2(sumValue);
     }
   });
 
