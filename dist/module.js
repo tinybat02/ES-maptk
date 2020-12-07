@@ -100679,7 +100679,8 @@ function (_super) {
       baseLayer: new maptalks__WEBPACK_IMPORTED_MODULE_2__["TileLayer"]('base', {
         urlTemplate: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
         subdomains: ['a', 'b', 'c', 'd'],
-        attribution: '&copy; <a href="https://carto.com/">CARTO</a>'
+        attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+        crossOrigin: undefined
       }),
       touchGesture: true,
       doubleClickZoom: false
