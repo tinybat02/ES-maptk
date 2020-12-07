@@ -28,6 +28,7 @@ export class MainPanel extends PureComponent<Props, State> {
         urlTemplate: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
         subdomains: ['a', 'b', 'c', 'd'],
         attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+        crossOrigin: null,
       }),
       touchGesture: true,
       doubleClickZoom: false,
