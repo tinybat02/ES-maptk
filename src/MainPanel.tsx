@@ -31,6 +31,7 @@ export class MainPanel extends PureComponent<Props, State> {
       }),
       touchGesture: true,
       doubleClickZoom: false,
+      scrollWheelZoom: false,
     });
 
     if (!this.props.options.geojson) return;

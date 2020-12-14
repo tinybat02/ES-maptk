@@ -100682,7 +100682,8 @@ function (_super) {
         attribution: '&copy; <a href="https://carto.com/">CARTO</a>'
       }),
       touchGesture: true,
-      doubleClickZoom: false
+      doubleClickZoom: false,
+      scrollWheelZoom: false
     });
     if (!this.props.options.geojson) return;
 
