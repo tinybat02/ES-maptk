@@ -108180,7 +108180,7 @@ function (_super) {
       var filename = _this.props.options.filename;
       var downloadCsv = use_csv_downloader__WEBPACK_IMPORTED_MODULE_5___default()({
         quote: '',
-        delimiter: ';'
+        delimiter: ','
       });
       downloadCsv(_this.state.csvData, filename + ".csv");
     };

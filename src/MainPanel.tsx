@@ -69,7 +69,7 @@ export class MainPanel extends PureComponent<Props, State> {
 
   onDownload = () => {
     const { filename } = this.props.options;
-    const downloadCsv = useCsvDownloader({ quote: '', delimiter: ';' });
+    const downloadCsv = useCsvDownloader({ quote: '', delimiter: ',' });
     downloadCsv(this.state.csvData, `${filename}.csv`);
   };
 
