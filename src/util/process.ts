@@ -1,4 +1,4 @@
-import { Frame, GeoJSON as IGeoJSON } from '../types';
+import { Frame, GeoJSON as IGeoJSON, CSVRow } from '../types';
 import { Mesh, MeshPhongMaterial, DirectionalLight, AmbientLight } from 'three';
 //@ts-ignore
 import { GeoJSON, LineString, Polygon, VectorLayer } from 'maptalks';
@@ -14,6 +14,7 @@ export const createLayer = (series: Frame[], geojson: IGeoJSON) => {
   const stores: string[] = [];
   const assignValueToStore: { [key: string]: number } = {};
   const assignValueToStoreLog: { [key: string]: number } = {};
+  const csvData: Array<CSVRow> = [];
 
   series.map(item => {
     const sumValue = item.fields[0].values.buffer.reduce((sum, elm) => sum + elm, 0);
@@ -21,6 +22,7 @@ export const createLayer = (series: Frame[], geojson: IGeoJSON) => {
       stores.push(item.name);
       assignValueToStore[item.name] = sumValue;
       assignValueToStoreLog[item.name] = Math.log2(sumValue);
+      csvData.push({ Store: item.name, Customers: sumValue });
     }
   });
 
@@ -100,5 +102,5 @@ export const createLayer = (series: Frame[], geojson: IGeoJSON) => {
     requestAnimationFrame(animation);
   }
 
-  return threeLayer;
+  return { threeLayer, csvData };
 };

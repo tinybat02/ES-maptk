@@ -1,6 +1,6 @@
-# Simple React Panel
+# Maptk React Panel
 
-This is just a stub to show how you can create a basic visualization plugin.
+Create map for grafana panel
 
 First, install dependencies:
 

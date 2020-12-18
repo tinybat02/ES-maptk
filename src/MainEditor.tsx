@@ -9,6 +9,22 @@ import CheckIcon from './img/CheckIcon.svg';
 import Exists from './img/Exists.svg';
 import None from './img/None.svg';
 
+const baseStyle: React.CSSProperties = {
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  padding: '20px',
+  borderWidth: 2,
+  borderRadius: 2,
+  borderColor: '#eeeeee',
+  borderStyle: 'dashed',
+  backgroundColor: '#fafafa',
+  color: '#bdbdbd',
+  outline: 'none',
+  transition: 'border .24s ease-in-out',
+};
+
 export const MainEditor: React.FC<PanelEditorProps<PanelOptions>> = ({ options, onOptionsChange }) => {
   const [inputs, setInputs] = useState(options);
   const [myFiles, setMyFiles] = useState<File[]>([]);
@@ -67,22 +83,6 @@ export const MainEditor: React.FC<PanelEditorProps<PanelOptions>> = ({ options, 
     reader.readAsText(chosenFile as Blob);
   };
 
-  const baseStyle: React.CSSProperties = {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: '20px',
-    borderWidth: 2,
-    borderRadius: 2,
-    borderColor: '#eeeeee',
-    borderStyle: 'dashed',
-    backgroundColor: '#fafafa',
-    color: '#bdbdbd',
-    outline: 'none',
-    transition: 'border .24s ease-in-out',
-  };
-
   return (
     <PanelOptionsGroup>
       <div className="editor-row">
@@ -113,6 +113,15 @@ export const MainEditor: React.FC<PanelEditorProps<PanelOptions>> = ({ options, 
             type="number"
             name="zoom_level"
             value={inputs.zoom_level}
+            onChange={handleChange}
+          />
+          <FormField
+            label="File Name"
+            labelWidth={10}
+            inputWidth={40}
+            type="text"
+            name="filename"
+            value={inputs.filename}
             onChange={handleChange}
           />
         </div>

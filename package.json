@@ -20,6 +20,7 @@
     "maptalks.three": "^0.12.3",
     "nanoid": "^3.1.20",
     "react-dropzone": "^11.2.4",
-    "three": "^0.123.0"
+    "three": "^0.123.0",
+    "use-csv-downloader": "0.0.0"
   }
 }

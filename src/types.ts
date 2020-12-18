@@ -19,6 +19,7 @@ export interface PanelOptions {
   center_lon: number;
   zoom_level: number;
   geojson: GeoJSON | null;
+  filename: string;
 }
 
 export const defaults: PanelOptions = {
@@ -26,6 +27,7 @@ export const defaults: PanelOptions = {
   center_lon: 11.60857,
   zoom_level: 18,
   geojson: null,
+  filename: '',
 };
 
 export interface Buffer extends Vector {
@@ -38,4 +40,9 @@ export interface FieldBuffer extends Field<any, Vector> {
 
 export interface Frame extends DataFrame {
   fields: FieldBuffer[];
+}
+
+export interface CSVRow {
+  Store: string;
+  Customers: number;
 }
