@@ -108478,8 +108478,9 @@ var createLayer = function createLayer(series, geojson) {
         var height = 3; // if (percentage >= 0.1) {
         //   height = (Math.round(percentage * 10) + 1) * 3;
         // }
+        // height = (Math.round(percentage * 10) + 1) * 3;
 
-        height = (Math.round(percentage * 10) + 1) * 3;
+        height = (percentage * 10 + 1) * 3;
         polygon.setProperties({
           height: height,
           num: assignValueToStore[feature.properties.name],
