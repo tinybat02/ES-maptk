@@ -57,9 +57,11 @@ export const createLayer = (series: Frame[], geojson: IGeoJSON) => {
         const polygon = GeoJSON.toGeometry(feature);
 
         let height = 3;
-        if (percentage >= 0.1) {
-          height = (Math.round(percentage * 10) + 1) * 3;
-        }
+        // if (percentage >= 0.1) {
+        //   height = (Math.round(percentage * 10) + 1) * 3;
+        // }
+
+        height = (Math.round(percentage * 10) + 1) * 3;
 
         polygon.setProperties({
           height: height,

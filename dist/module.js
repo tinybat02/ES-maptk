@@ -108475,12 +108475,11 @@ var createLayer = function createLayer(series, geojson) {
           transparent: true
         });
         var polygon = maptalks__WEBPACK_IMPORTED_MODULE_2__["GeoJSON"].toGeometry(feature);
-        var height = 3;
+        var height = 3; // if (percentage >= 0.1) {
+        //   height = (Math.round(percentage * 10) + 1) * 3;
+        // }
 
-        if (percentage >= 0.1) {
-          height = (Math.round(percentage * 10) + 1) * 3;
-        }
-
+        height = (Math.round(percentage * 10) + 1) * 3;
         polygon.setProperties({
           height: height,
           num: assignValueToStore[feature.properties.name],
