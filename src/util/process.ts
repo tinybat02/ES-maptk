@@ -21,8 +21,8 @@ export const createLayer = (series: Frame[], geojson: IGeoJSON) => {
     if (item.name) {
       stores.push(item.name);
       assignValueToStore[item.name] = sumValue;
-      // assignValueToStoreLog[item.name] = Math.log2(sumValue);
-      assignValueToStoreLog[item.name] = sumValue / 250;
+      assignValueToStoreLog[item.name] = Math.log2(sumValue);
+      // assignValueToStoreLog[item.name] = sumValue / 250;
       csvData.push({ Store: item.name, Customers: sumValue });
     }
   });
@@ -48,22 +48,22 @@ export const createLayer = (series: Frame[], geojson: IGeoJSON) => {
 
     geojson.features.map(feature => {
       if (feature.properties && feature.properties.name && stores.includes(feature.properties.name)) {
-        // const percentage = (assignValueToStoreLog[feature.properties.name] - min) / range;
-        const percentage = assignValueToStoreLog[feature.properties.name];
+        const percentage = (assignValueToStoreLog[feature.properties.name] - min) / range;
+        // const percentage = assignValueToStoreLog[feature.properties.name];
         const material = new MeshPhongMaterial({
           color: range != 0 ? percentageToHsl(percentage) : 'hsla(49, 100%, 50%, 0.5)',
           transparent: true,
         });
         const polygon = GeoJSON.toGeometry(feature);
 
-        // let height = 3;
-        let height = 15;
-        // if (percentage >= 0.1) {
-        //   height = (Math.round(percentage * 10) + 1) * 3;
-        // }
+        let height = 3;
+        // let height = 15;
+        if (percentage >= 0.1) {
+          height = (Math.round(percentage * 10) + 1) * 3;
+        }
 
         // height = (Math.round(percentage * 10) + 1) * 3;
-        height = (percentage * 10 + 1) * 15;
+        // height = (percentage * 10 + 1) * 15;
 
         polygon.setProperties({
           height: height,

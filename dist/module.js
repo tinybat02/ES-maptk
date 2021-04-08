@@ -108462,9 +108462,9 @@ var createLayer = function createLayer(series, geojson) {
 
     if (item.name) {
       stores.push(item.name);
-      assignValueToStore[item.name] = sumValue; // assignValueToStoreLog[item.name] = Math.log2(sumValue);
+      assignValueToStore[item.name] = sumValue;
+      assignValueToStoreLog[item.name] = Math.log2(sumValue); // assignValueToStoreLog[item.name] = sumValue / 250;
 
-      assignValueToStoreLog[item.name] = sumValue / 250;
       csvData.push({
         Store: item.name,
         Customers: sumValue
@@ -108488,20 +108488,21 @@ var createLayer = function createLayer(series, geojson) {
     scene.add(new three__WEBPACK_IMPORTED_MODULE_1__["AmbientLight"](0xffffff));
     geojson.features.map(function (feature) {
       if (feature.properties && feature.properties.name && stores.includes(feature.properties.name)) {
-        // const percentage = (assignValueToStoreLog[feature.properties.name] - min) / range;
-        var percentage = assignValueToStoreLog[feature.properties.name];
+        var percentage = (assignValueToStoreLog[feature.properties.name] - min) / range; // const percentage = assignValueToStoreLog[feature.properties.name];
+
         var material = new three__WEBPACK_IMPORTED_MODULE_1__["MeshPhongMaterial"]({
           color: range != 0 ? percentageToHsl(percentage) : 'hsla(49, 100%, 50%, 0.5)',
           transparent: true
         });
-        var polygon = maptalks__WEBPACK_IMPORTED_MODULE_2__["GeoJSON"].toGeometry(feature); // let height = 3;
+        var polygon = maptalks__WEBPACK_IMPORTED_MODULE_2__["GeoJSON"].toGeometry(feature);
+        var height = 3; // let height = 15;
 
-        var height = 15; // if (percentage >= 0.1) {
-        //   height = (Math.round(percentage * 10) + 1) * 3;
-        // }
-        // height = (Math.round(percentage * 10) + 1) * 3;
+        if (percentage >= 0.1) {
+          height = (Math.round(percentage * 10) + 1) * 3;
+        } // height = (Math.round(percentage * 10) + 1) * 3;
+        // height = (percentage * 10 + 1) * 15;
 
-        height = (percentage * 10 + 1) * 15;
+
         polygon.setProperties({
           height: height,
           num: assignValueToStore[feature.properties.name],
