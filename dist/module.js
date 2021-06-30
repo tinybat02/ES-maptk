@@ -108495,9 +108495,9 @@ var createLayer = function createLayer(series, geojson) {
           transparent: true
         });
 
-        if (feature.type == 'LineString') {
+        if (feature.geometry.type == 'LineString') {
           var tmp = feature.geometry.coordinates;
-          feature.type = 'Polygon';
+          feature.geometry.type = 'Polygon';
           feature.geometry.coordinates = [tmp];
         }
 

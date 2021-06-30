@@ -55,9 +55,9 @@ export const createLayer = (series: Frame[], geojson: IGeoJSON) => {
           transparent: true,
         });
 
-        if (feature.type == 'LineString') {
+        if (feature.geometry.type == 'LineString') {
           const tmp = feature.geometry.coordinates;
-          feature.type = 'Polygon';
+          feature.geometry.type = 'Polygon';
           feature.geometry.coordinates = [tmp];
         }
         const polygon = GeoJSON.toGeometry(feature);
