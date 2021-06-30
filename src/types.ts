@@ -9,7 +9,7 @@ export interface GeoJSON {
     };
     geometry: {
       type: string;
-      coordinates: number[][][];
+      coordinates: any;
     };
   }>;
 }

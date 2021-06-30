@@ -54,6 +54,12 @@ export const createLayer = (series: Frame[], geojson: IGeoJSON) => {
           color: range != 0 ? percentageToHsl(percentage) : 'hsla(49, 100%, 50%, 0.5)',
           transparent: true,
         });
+
+        if (feature.type == 'LineString') {
+          const tmp = feature.geometry.coordinates;
+          feature.type = 'Polygon';
+          feature.geometry.coordinates = [tmp];
+        }
         const polygon = GeoJSON.toGeometry(feature);
 
         let height = 3;

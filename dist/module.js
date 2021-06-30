@@ -108494,6 +108494,13 @@ var createLayer = function createLayer(series, geojson) {
           color: range != 0 ? percentageToHsl(percentage) : 'hsla(49, 100%, 50%, 0.5)',
           transparent: true
         });
+
+        if (feature.type == 'LineString') {
+          var tmp = feature.geometry.coordinates;
+          feature.type = 'Polygon';
+          feature.geometry.coordinates = [tmp];
+        }
+
         var polygon = maptalks__WEBPACK_IMPORTED_MODULE_2__["GeoJSON"].toGeometry(feature);
         var height = 3; // let height = 15;
 
